@@ -127,8 +127,30 @@ async function logoutUserController(req,res){
 
 }
 
+
+async function getMeController(req,res){
+    const user= await userModel.findById(req.user.id)   // ID comes form JWT (not DB)
+                                                        // DB is using that ID to return full user data
+
+
+    res.status(200).json({                        
+        message:"user details fetched successfully",
+        user:{
+            id:user._id,
+            username:user.username,
+            email:user.email
+        }
+    })
+
+
+
+
+
+}
+
 module.exports={
     registerUserController,
     loginUserController,
-    logoutUserController
+    logoutUserController,
+    getMeController
 }
