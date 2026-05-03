@@ -90,7 +90,7 @@ async function loginUserController(req,res){
         {expiresIn:"8d"}
     )
 
-    res.cookie=("token",token)
+    res.cookie("token",token)
 
 
     res.status(200).json({
