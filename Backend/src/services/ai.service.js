@@ -89,7 +89,7 @@ Job Description: ${jobDescription}
         }
     })
 
-    console.log(response.text)
+    return(response.text)
 
    
 
