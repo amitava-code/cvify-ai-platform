@@ -1,7 +1,7 @@
 const resume = `
 🚀 Aspiring Full Stack Developer | MERN Stack | Problem Solver
 
-I’m a first-year ECE student focused on building real-world, scalable applications and strengthening my problem-solving skills every day.
+Hi I am Amitava a first-year ECE student focused on building real-world, scalable applications and strengthening my problem-solving skills every day.
 
 💡 What I bring:
 • Built multiple full-stack MERN applications with authentication, REST APIs, and responsive UI

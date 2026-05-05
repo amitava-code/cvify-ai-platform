@@ -1,5 +1,3 @@
-
-
 const { GoogleGenAI } = require("@google/genai")
 const { z } = require("zod")
 const { zodToJsonSchema } = require("zod-to-json-schema")
@@ -35,33 +33,71 @@ const interviewReportSchema = z.object({
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
-     console.log("AI FUNCTION CALLED");
+    const prompt = `
+You MUST return a JSON object EXACTLY matching this structure:
 
+{
+  "matchScore": number (0-100),
+  "technicalQuestions": [
+    {
+      "question": string,
+      "intention": string,
+      "answer": string
+    }
+  ],
+  "behavioralQuestions": [
+    {
+      "question": string,
+      "intention": string,
+      "answer": string
+    }
+  ],
+  "skillGaps": [
+    {
+      "skill": string,
+      "severity": "low" | "medium" | "high"
+    }
+  ],
+  "preparationPlan": [
+    {
+      "day": number,
+      "focus": string,
+      "tasks": string[]
+    }
+  ],
+  "title": string
+}
 
-    const prompt = `Generate an interview report for a candidate with the following details:
-     Resume: ${resume}
-     Self Description: ${selfDescription}
-     Job Description: ${jobDescription} `;
+STRICT RULES:
+- Do NOT add extra fields
+- Do NOT rename keys
+- Do NOT skip fields
+- Output ONLY valid JSON
 
+Now generate based on:
 
-
-     console.log("Before ai")
+Resume: ${resume}
+Self Description: ${selfDescription}
+Job Description: ${jobDescription}
+`
 
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: prompt,
         config: {
             responseMimeType: "application/json",
-            responseJsonSchema: zodToJsonSchema(interviewReportSchema),
         }
     })
 
+    console.log(response.text)
 
-    console.log("after ai")
-    console.log(JSON.parse(response.text))
+   
+
+
 
 
 }
 
 
-module.exports=generateInterviewReport
+
+module.exports =  generateInterviewReport 
